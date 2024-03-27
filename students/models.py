@@ -26,7 +26,7 @@ class Student(models.Model):
     is_studying = models.BooleanField(default=True)
     current_class = models.ForeignKey(Course, on_delete=models.CASCADE)
     profile_image = models.ImageField(upload_to=user_directory_path, blank=True)
-
+    id = models.BigAutoField(primary_key=True)
     def __str__(self):
         return self.full_name()
 
