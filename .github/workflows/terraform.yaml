@@ -35,7 +35,7 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan
-        working-directory: ./terraform
+        working-directory: ../terraform
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
