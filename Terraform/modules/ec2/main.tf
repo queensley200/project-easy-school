@@ -38,8 +38,4 @@ output "public_ip" {
   value = aws_instance.web.public_ip
 }
 
-variable "key_name" {
-  description = "Key pair name for EC2"
-  type        = string
-  default     = "easy"  
-}
+
