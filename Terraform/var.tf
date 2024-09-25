@@ -1,24 +1,19 @@
-variable "aws_region" {
-  description = "AWS region to deploy resources"
-  default     = "eu-north-1"
+variable "cidr_block" {
+  description = "For VPC cidr_block"
+  default     = "10.0.0.0/16"
+  type        = string
 }
 
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
-  default     = "10.0.0.0/16"
+variable "security_group_name" {
+  type = string
+}
+
+variable "subnet_cidr_block" {
+    description = "The CIDR block for the subnet"
+  type        = string
+  default     = "10.0.1.0/24" 
 }
 
 variable "instance_type" {
-  description = "Type of instance"
-  default     = "t3.micro"
-}
-
-variable "ami_id" {
-  description = "AMI ID for the EC2 instance"
-  default     = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI
-}
-
-variable "key_name" {
-  description = "Key pair name for EC2"
-  default = "easy"
+  type = string
 }
