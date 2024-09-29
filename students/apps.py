@@ -1,8 +1,7 @@
-#from django.apps import AppConfig
+# from django.apps import AppConfig
 
-
-#class StudentsConfig(AppConfig):
- #   name = 'students'
+# class StudentsConfig(AppConfig):
+#     name = 'students'
 # students/apps.py
 
 from django.apps import AppConfig

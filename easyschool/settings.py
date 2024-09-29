@@ -29,10 +29,10 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    #...
+    # ...
     'admin_interface',
     'colorfield',
-
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'teachers.apps.TeachersConfig',
     'django.contrib.humanize'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -49,6 +49,7 @@ class TeacherAdmin(admin.ModelAdmin, ExportCsvMixin):
         'is_teaching',
     )
 
+
     list_filter = (
         'gender',
         'is_teaching',
