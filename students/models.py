@@ -11,7 +11,7 @@ from easyschool.utils import GENDER_CHOICES, MONTHS_CHOICE, next_month
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'user_{0}/{1}'.format(instance.admission_no, filename)
+    return "user_{0}/{1}".format(instance.admission_no, filename)
 
 
 class Student(models.Model):
@@ -27,27 +27,28 @@ class Student(models.Model):
     current_class = models.ForeignKey(Course, on_delete=models.CASCADE)
     profile_image = models.ImageField(upload_to=user_directory_path, blank=True)
     id = models.BigAutoField(primary_key=True)
+
     def __str__(self):
         return self.full_name()
 
     def full_name(self):
-        return '{} {}'.format(self.first_name, self.last_name).capitalize()
+        return "{} {}".format(self.first_name, self.last_name).capitalize()
 
-    full_name.admin_order_field = 'first_name'
+    full_name.admin_order_field = "first_name"
 
     @property
     def detail(self):
-        return '{} Class - {}'.format(self.current_class, self.full_name)
+        return "{} Class - {}".format(self.current_class, self.full_name)
 
 
 class StudentFee(models.Model):
     student = models.ForeignKey(Student, on_delete=models.PROTECT)
-    valid_until = models.DateField(verbose_name='Valid Until', default=next_month())
+    valid_until = models.DateField(verbose_name="Valid Until", default=next_month())
     total_amount = models.PositiveIntegerField(default=0)
     date_submitted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Fee : {self.student.full_name()} {str(self.date_submitted)}'
+        return f"Fee : {self.student.full_name()} {str(self.date_submitted)}"
 
     @property
     def month_name(self):
@@ -63,4 +64,4 @@ class Guardian(models.Model):
     profession = models.CharField(max_length=50, default="Not Set")
 
     def __str__(self):
-        return f'{self.name}'
+        return f"{self.name}"

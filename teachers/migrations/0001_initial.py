@@ -31,20 +31,46 @@ class Migration(migrations.Migration):
     #         ],
     #     ),
     # ]
+
+
 operations = [
     migrations.CreateModel(
-        name='Teacher',
+        name="Teacher",
         fields=[
-            ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-            ('date_of_joining', models.DateField()),
-            ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=1)),
-            ('date_of_birth', models.DateField()),
-            ('social_security_number', models.CharField(max_length=30)),
-            ('phone_no', models.CharField(default='0000000', max_length=11)),
-            ('address', models.CharField(default='Not Set', max_length=150)),
-            ('is_teaching', models.BooleanField(default=True)),
-            ('profile_image', models.ImageField(blank=True, upload_to=teachers.models.user_directory_path)),
-            ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            (
+                "id",
+                models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name="ID",
+                ),
+            ),
+            ("date_of_joining", models.DateField()),
+            (
+                "gender",
+                models.CharField(
+                    choices=[("M", "Male"), ("F", "Female")], max_length=1
+                ),
+            ),
+            ("date_of_birth", models.DateField()),
+            ("social_security_number", models.CharField(max_length=30)),
+            ("phone_no", models.CharField(default="0000000", max_length=11)),
+            ("address", models.CharField(default="Not Set", max_length=150)),
+            ("is_teaching", models.BooleanField(default=True)),
+            (
+                "profile_image",
+                models.ImageField(
+                    blank=True, upload_to=teachers.models.user_directory_path
+                ),
+            ),
+            (
+                "user",
+                models.OneToOneField(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to=settings.AUTH_USER_MODEL,
+                ),
+            ),
         ],
     ),
 ]

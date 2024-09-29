@@ -6,7 +6,7 @@ from easyschool.utils import GENDER_CHOICES, next_month
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'teacher_{0}/{1}'.format(instance.cnic, filename)
+    return "teacher_{0}/{1}".format(instance.cnic, filename)
 
 
 # Create your models here.
@@ -22,8 +22,9 @@ class Teacher(models.Model):
     is_teaching = models.BooleanField(default=True)
     profile_image = models.ImageField(upload_to=user_directory_path, blank=True)
     id = models.BigAutoField(primary_key=True)
+
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f"{self.user.first_name} {self.user.last_name}"
 
     @property
     def full_name(self):
@@ -33,12 +34,12 @@ class Teacher(models.Model):
 
 class TeacherSalary(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT)
-    valid_until = models.DateField(verbose_name='Valid Until', default=next_month())
+    valid_until = models.DateField(verbose_name="Valid Until", default=next_month())
     total_amount = models.PositiveIntegerField(default=0)
     paid_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Salary : {self.teacher.full_name} {str(self.paid_on)}'
+        return f"Salary : {self.teacher.full_name} {str(self.paid_on)}"
 
     @property
     def month_name(self):
@@ -48,5 +49,5 @@ class TeacherSalary(models.Model):
 class FinanceSummary(TeacherSalary):
     class Meta:
         proxy = True
-        verbose_name = 'Finance Summary'
-        verbose_name_plural = 'Finance Summary'
+        verbose_name = "Finance Summary"
+        verbose_name_plural = "Finance Summary"

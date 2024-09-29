@@ -12,47 +12,81 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('teachers', '0001_initial'),
+        ("teachers", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Teacher',
+            name="Teacher",
             fields=[
-                ('date_of_joining', models.DateField()),
-                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=1)),
-                ('date_of_birth', models.DateField()),
-                ('social_security_number', models.CharField(max_length=30)),
-                ('phone_no', models.CharField(default='0000000', max_length=11)),
-                ('address', models.CharField(default='Not Set', max_length=150)),
-                ('is_teaching', models.BooleanField(default=True)),
-                ('profile_image', models.ImageField(blank=True, upload_to=teachers.models.user_directory_path)),
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("date_of_joining", models.DateField()),
+                (
+                    "gender",
+                    models.CharField(
+                        choices=[("M", "Male"), ("F", "Female")], max_length=1
+                    ),
+                ),
+                ("date_of_birth", models.DateField()),
+                ("social_security_number", models.CharField(max_length=30)),
+                ("phone_no", models.CharField(default="0000000", max_length=11)),
+                ("address", models.CharField(default="Not Set", max_length=150)),
+                ("is_teaching", models.BooleanField(default=True)),
+                (
+                    "profile_image",
+                    models.ImageField(
+                        blank=True, upload_to=teachers.models.user_directory_path
+                    ),
+                ),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='TeacherSalary',
+            name="TeacherSalary",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('valid_until', models.DateField(default=datetime.date(2024, 4, 1), verbose_name='Valid Until')),
-                ('total_amount', models.PositiveIntegerField(default=0)),
-                ('paid_on', models.DateTimeField(auto_now_add=True)),
-                ('teacher', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='teachers.teacher')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "valid_until",
+                    models.DateField(
+                        default=datetime.date(2024, 4, 1), verbose_name="Valid Until"
+                    ),
+                ),
+                ("total_amount", models.PositiveIntegerField(default=0)),
+                ("paid_on", models.DateTimeField(auto_now_add=True)),
+                (
+                    "teacher",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="teachers.teacher",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='FinanceSummary',
-            fields=[
-            ],
+            name="FinanceSummary",
+            fields=[],
             options={
-                'verbose_name': 'Finance Summary',
-                'verbose_name_plural': 'Finance Summary',
-                'proxy': True,
-                'indexes': [],
-                'constraints': [],
+                "verbose_name": "Finance Summary",
+                "verbose_name_plural": "Finance Summary",
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
             },
-            bases=('teachers.teachersalary',),
+            bases=("teachers.teachersalary",),
         ),
     ]

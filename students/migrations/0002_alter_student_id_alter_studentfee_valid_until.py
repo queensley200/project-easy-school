@@ -7,18 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('students', '0001_initial'),
+        ("students", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='student',
-            name='id',
+            model_name="student",
+            name="id",
             field=models.BigAutoField(primary_key=True, serialize=False),
         ),
         migrations.AlterField(
-            model_name='studentfee',
-            name='valid_until',
-            field=models.DateField(default=datetime.date(2024, 4, 1), verbose_name='Valid Until'),
+            model_name="studentfee",
+            name="valid_until",
+            field=models.DateField(
+                default=datetime.date(2024, 4, 1), verbose_name="Valid Until"
+            ),
         ),
     ]

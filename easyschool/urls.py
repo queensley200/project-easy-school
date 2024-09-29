@@ -6,17 +6,17 @@ from django.views.generic.base import TemplateView
 from teachers import views
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='soon.html'), name='home'),
-    path('admin/', admin.site.urls),
-    path('signup/', views.TeacherSignUpFormView.as_view(), name='signup'),
-    path('login/', views.login, name='login'),
+    path("", TemplateView.as_view(template_name="soon.html"), name="home"),
+    path("admin/", admin.site.urls),
+    path("signup/", views.TeacherSignUpFormView.as_view(), name="signup"),
+    path("login/", views.login, name="login"),
 ]
 
 if settings.DEBUG:
     import debug_toolbar  # Add debugging urls
 
     urlpatterns += [
-        path('__debug__/', include(debug_toolbar.urls)),
+        path("__debug__/", include(debug_toolbar.urls)),
     ]
     # Static Files URLs
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

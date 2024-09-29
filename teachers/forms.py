@@ -8,46 +8,55 @@ from easyschool.utils import GENDER_CHOICES
 
 class TeacherSignUpForm(forms.ModelForm):
     password1 = forms.CharField(
-        label='Password',
-        strip= False,
+        label="Password",
+        strip=False,
     )
 
-    password2 = forms.CharField(
-        label = 'Password confirmation',
-        strip = False
+    password2 = forms.CharField(label="Password confirmation", strip=False)
+    username = forms.CharField(
+        max_length=11,
+        help_text="Enter your username, this will be used to login",
+        label="Username",
+        required=True,
     )
-    username = forms.CharField(max_length=11, help_text="Enter your username, this will be used to login",
-                               label="Username",
-                               required=True)
 
-    date_of_joining = forms.DateField(widget=forms.SelectDateWidget(years=range(1960, 2020)))
-    date_of_birth = forms.DateField(widget=forms.SelectDateWidget(years=range(1960, 2020)))
-    gender = forms.ChoiceField(choices= GENDER_CHOICES)
+    date_of_joining = forms.DateField(
+        widget=forms.SelectDateWidget(years=range(1960, 2020))
+    )
+    date_of_birth = forms.DateField(
+        widget=forms.SelectDateWidget(years=range(1960, 2020))
+    )
+    gender = forms.ChoiceField(choices=GENDER_CHOICES)
     cnic = forms.CharField(max_length=15)
     phone_no = forms.CharField(max_length=12)
-    is_teaching = forms.BooleanField(label= 'Presently teaching in this school',required=False)
+    is_teaching = forms.BooleanField(
+        label="Presently teaching in this school", required=False
+    )
     address = forms.CharField(max_length=150, required=True)
-    profile_image = forms.ImageField(required=False, label='Profile Picture')
+    profile_image = forms.ImageField(required=False, label="Profile Picture")
 
     def clean_email(self):
-        email = self.cleaned_data['email']
+        email = self.cleaned_data["email"]
         if email is None:
-            raise forms.ValidationError('Please enter  email address')
+            raise forms.ValidationError("Please enter  email address")
         return email
 
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
-        for  field in self.Meta.required:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.Meta.required:
             self.fields[field].required = True
-
 
     class Meta:
         model = User
-        fields = [ 'username', 'first_name', 'last_name','password1','password2' ,'email']
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "password1",
+            "password2",
+            "email",
+        ]
         required = (
-            'last_name',
-            'email',
+            "last_name",
+            "email",
         )
-
-
-
