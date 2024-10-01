@@ -6,7 +6,7 @@ gratitude here before we get going. Thank You!
 ## Git
 This repo uses git, hence it is on GitHub. Generally, `master` is the *next-release* branch, which people
 ~~shouldn't~~ **SHOULD NEVER EVER EVER EVER** clone to run in production, but you still shouldn't hack directly on it.
-If you want to add a new feature, make a new branch. 
+If you want to add a new feature, make a new branch.
 There is a naming scheme for branches:
 `issueID.somename`
 
@@ -24,4 +24,3 @@ will add the appropriate tags. New features should also be in the issue tracker,
 ## I have an idea!
 Great! Make an issue! A maintainer will tag it with `idea`, which means "up for debate" or `task`,
 which means "somebody do this, please".
-

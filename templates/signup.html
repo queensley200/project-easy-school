@@ -68,24 +68,24 @@
 
 
     </style>
-    
+
     <title>Sign up</title>
 </head>
 
 
-{% block content %}  
+{% block content %}
 
 <div class="container">
     <div class="content">
       <h3>Sign up</h3>
-      
+
       <form method="post" enctype="multipart/form-data" >
         {% csrf_token %}
-        
-        
-      {{form.as_p}}    
 
-      <input type="submit" value="Submit"> 
+
+      {{form.as_p}}
+
+      <input type="submit" value="Submit">
       </form>
     </div>
 </div>

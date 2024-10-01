@@ -29,17 +29,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Run static code analysis (e.g., Flake8)
+      # Step 4: Run static code analysis (Flake8)
       - name: Run Flake8 (code quality check)
         run: |
           pip install flake8
-          flake8 .
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics  # Check for specific errors
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics  # Full report
 
       # Step 5: Run security checks (e.g., Bandit)
       - name: Run Security Scan (Bandit)
         run: |
           pip install bandit
-          bandit -r . 
+          bandit -r .
 
       # Step 6: Run tests
       - name: Run Tests
