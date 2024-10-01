@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+import calendar
 from easyschool.utils import GENDER_CHOICES, next_month
 
 
@@ -20,7 +20,10 @@ class Teacher(models.Model):
     address = models.CharField(max_length=150, default="Not Set")
     cnic = models.CharField(max_length=30, default="")
     is_teaching = models.BooleanField(default=True)
-    profile_image = models.ImageField(upload_to=user_directory_path, blank=True)
+    profile_image = models.ImageField(
+        upload_to=user_directory_path,
+        blank=True
+    )
     id = models.BigAutoField(primary_key=True)
 
     def __str__(self):
@@ -34,16 +37,19 @@ class Teacher(models.Model):
 
 class TeacherSalary(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT)
-    valid_until = models.DateField(verbose_name="Valid Until", default=next_month())
+    valid_until = models.DateField(
+        verbose_name="Valid Until",
+        default=next_month()
+    )
     total_amount = models.PositiveIntegerField(default=0)
     paid_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Salary : {self.teacher.full_name} {str(self.paid_on)}"
+        return f"Salary: {self.teacher.full_name} {str(self.paid_on)}"
 
     @property
     def month_name(self):
-        return calendar.month_name[valid_until.month]
+        return calendar.month_name[self.valid_until.month]
 
 
 class FinanceSummary(TeacherSalary):
