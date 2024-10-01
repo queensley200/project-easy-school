@@ -1,12 +1,7 @@
 import calendar
-from datetime import date, datetime, timedelta
-
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.utils import timezone
-
 from course.models import Course
-from easyschool.utils import GENDER_CHOICES, MONTHS_CHOICE, next_month
+from easyschool.utils import GENDER_CHOICES, next_month
 
 
 def user_directory_path(instance, filename):
@@ -25,14 +20,19 @@ class Student(models.Model):
     address = models.CharField(max_length=150, default="Not Set")
     is_studying = models.BooleanField(default=True)
     current_class = models.ForeignKey(Course, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to=user_directory_path, blank=True)
+    profile_image = models.ImageField(
+        upload_to=user_directory_path,
+        blank=True
+    )
     id = models.BigAutoField(primary_key=True)
 
     def __str__(self):
         return self.full_name()
 
     def full_name(self):
-        return "{} {}".format(self.first_name, self.last_name).capitalize()
+        return "{} {}".format(
+            self.first_name, self.last_name
+        ).capitalize()
 
     full_name.admin_order_field = "first_name"
 
@@ -43,16 +43,20 @@ class Student(models.Model):
 
 class StudentFee(models.Model):
     student = models.ForeignKey(Student, on_delete=models.PROTECT)
-    valid_until = models.DateField(verbose_name="Valid Until", default=next_month())
+    valid_until = models.DateField(
+        verbose_name="Valid Until",
+        default=next_month()
+    )
     total_amount = models.PositiveIntegerField(default=0)
     date_submitted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Fee : {self.student.full_name()} {str(self.date_submitted)}"
+        return f"Fee: {self.student.full_name()} " \
+                f"{str(self.date_submitted)}"
 
     @property
     def month_name(self):
-        return calendar.month_name[valid_until.month]
+        return calendar.month_name[self.valid_until.month]
 
 
 class Guardian(models.Model):
