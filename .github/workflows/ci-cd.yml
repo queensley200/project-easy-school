@@ -59,7 +59,7 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
-          ssh -i private_key.pem -o StrictHostKeyChecking=no ubuntu@your-server-ip << EOF
+          ssh -n -i private_key.pem -o StrictHostKeyChecking=no ubuntu@your-server-ip << EOF
           cd /home/ubuntu/myapp
           git pull origin main
           # If using a virtual environment, activate it
