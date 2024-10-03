@@ -16,3 +16,4 @@ static/
 Terraform/.terraform/
 Terraform/*.tfstate
 Terraform/.terraform.lock.hcl
+.pytest_cache
